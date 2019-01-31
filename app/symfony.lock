@@ -89,6 +89,9 @@
             "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
         }
     },
+    "ecodev/graphql-upload": {
+        "version": "4.0.0"
+    },
     "egulias/email-validator": {
         "version": "2.1.6"
     },
@@ -115,6 +118,9 @@
     },
     "monolog/monolog": {
         "version": "1.24.0"
+    },
+    "mouf/classname-mapper": {
+        "version": "v1.0.2"
     },
     "nesbot/carbon": {
         "version": "2.7.0"
@@ -146,6 +152,15 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "overblog/graphiql-bundle": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.1",
+            "ref": "fe8d172f2480efc598f5a8be0e732656d3594cec"
+        }
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -166,6 +181,15 @@
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
+    "psr/http-server-handler": {
+        "version": "1.0.1"
+    },
+    "psr/http-server-middleware": {
+        "version": "1.0.1"
     },
     "psr/link": {
         "version": "1.0.0"
@@ -365,6 +389,9 @@
     "symfony/property-info": {
         "version": "v4.2.0"
     },
+    "symfony/psr-http-message-bridge": {
+        "version": "v1.1.0"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -488,6 +515,15 @@
     "symfony/yaml": {
         "version": "v4.2.0"
     },
+    "thecodingmachine/class-explorer": {
+        "version": "1.1.x-dev"
+    },
+    "thecodingmachine/graphqlite": {
+        "version": "3.0.x-dev"
+    },
+    "thecodingmachine/graphqlite-bundle": {
+        "version": "3.0.x-dev"
+    },
     "thecodingmachine/phpstan-safe-rule": {
         "version": "v0.1.0"
     },
@@ -503,6 +539,9 @@
     "webmozart/assert": {
         "version": "1.3.0"
     },
+    "webonyx/graphql-php": {
+        "version": "v0.13.0"
+    },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"
     },
@@ -511,6 +550,9 @@
     },
     "zendframework/zend-code": {
         "version": "3.3.1"
+    },
+    "zendframework/zend-diactoros": {
+        "version": "1.8.6"
     },
     "zendframework/zend-eventmanager": {
         "version": "3.2.1"

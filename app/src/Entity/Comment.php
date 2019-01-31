@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="posts")
+ * @ORM\Table(name="comments")
  * @ORM\HasLifecycleCallbacks
  */
-class Post
+class Comment
 {
     /**
      * @var int
@@ -37,6 +37,27 @@ class Post
      * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     private $updated;
+
+    /**
+     * @var Post
+     * @ORM\ManyToOne(targetEntity=Post::class)
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     */
+    private $post;
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $author;
+
+    public function __construct(string $message, Post $post, User $author)
+    {
+        $this->message = $message;
+        $this->post = $post;
+        $this->author = $author;
+    }
 
     /**
      * @ORM\PrePersist

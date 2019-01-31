@@ -12,7 +12,7 @@ use function Safe\json_encode;
 final class IndexController extends AbstractController
 {
     /**
-     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!api|_(profiler|wdt)).*"}, name="index")
+     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!api|graphiql|graphql|_(profiler|wdt)).*"}, name="index")
      * @return Response
      * @throws JsonException
      */
