@@ -20,7 +20,7 @@ class PostRepository
     {
         return $this->getManager()
             ->createQuery(
-                'SELECT p FROM AppBundle:Product p WHERE message LIKE :search'
+                'SELECT p FROM App\\Entity\\Post p WHERE p.message LIKE :search'
             )
             ->setParameter('search', '%'.$search.'%')
             ->getResult();

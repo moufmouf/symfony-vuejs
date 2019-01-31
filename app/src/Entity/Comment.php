@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
+use TheCodingMachine\GraphQLite\Annotations\Field;
+use TheCodingMachine\GraphQLite\Annotations\Type;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="comments")
  * @ORM\HasLifecycleCallbacks
+ * @Type()
  */
 class Comment
 {
@@ -28,13 +31,13 @@ class Comment
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(name="created", type="datetime_immutable")
      */
     private $created;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     * @ORM\Column(name="updated", type="datetime_immutable", nullable=true)
      */
     private $updated;
 
@@ -65,7 +68,7 @@ class Comment
      */
     public function onPrePersist(): void
     {
-        $this->created = Carbon::now();
+        $this->created = new \DateTimeImmutable();
     }
 
     /**
@@ -74,11 +77,11 @@ class Comment
      */
     public function onPreUpdate(): void
     {
-        $this->updated = Carbon::now();
+        $this->updated = new \DateTimeImmutable();
     }
 
     /**
-     * @return int
+     * @Field(outputType="ID")
      */
     public function getId(): int
     {
@@ -86,7 +89,7 @@ class Comment
     }
 
     /**
-     * @return string
+     * @Field()
      */
     public function getMessage(): string
     {
@@ -103,18 +106,34 @@ class Comment
     }
 
     /**
-     * @return \DateTime
+     * @Field()
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): \DateTimeImmutable
     {
         return $this->created;
     }
 
     /**
-     * @return \DateTime|null
+     * @Field()
      */
-    public function getUpdated(): ?\DateTime
+    public function getUpdated(): ?\DateTimeImmutable
     {
         return $this->updated;
+    }
+
+    /**
+     * @Field()
+     */
+    public function getPost(): Post
+    {
+        return $this->post;
+    }
+
+    /**
+     * @Field()
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
     }
 }

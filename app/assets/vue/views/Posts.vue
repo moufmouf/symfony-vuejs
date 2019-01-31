@@ -4,80 +4,53 @@
             <h1>Posts</h1>
         </div>
 
-        <div class="row col" v-if="canCreatePost">
-            <form>
-                <div class="form-row">
-                    <div class="col-8">
-                        <input v-model="message" type="text" class="form-control">
-                    </div>
-                    <div class="col-4">
-                        <button @click="createPost()" :disabled="message.length === 0 || isLoading" type="button" class="btn btn-primary">Create</button>
+        <form>
+            <div class="form-row">
+                <div class="col-8">
+                    <input v-model="search" type="text" class="form-control" placeholder="Search">
+                </div>
+            </div>
+        </form>
+
+        <ApolloQuery
+                :query="require('../graphql/posts.gql')"
+                :variables="{ search }"
+        >
+            <template slot-scope="{ result: { loading, error, data } }">
+                <!-- Loading -->
+                <div v-if="loading" class="loading apollo row col">Loading...</div>
+
+                <!-- Error -->
+                <div v-else-if="error" class="error apollo row col">An error occurred</div>
+
+                <!-- Result -->
+                <div v-else-if="data" class="result apollo row py-3">
+                    <div v-for="post in data.posts" class="card p-2 m-2" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Article</h5>
+                            <p class="card-text">{{ post.message }}
+
+                            <div><em>by {{ post.author.login }}</em></div>
+                            </p>
+                            <a href="#" class="btn btn-primary">See article</a>
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
 
-        <div v-if="isLoading" class="row col">
-            <p>Loading...</p>
-        </div>
-
-        <div v-else-if="hasError" class="row col">
-            <error-message :error="error"></error-message>
-        </div>
-
-        <div v-else-if="!hasPosts" class="row col">
-            No posts!
-        </div>
-
-        <div v-else v-for="post in posts" class="row col">
-            <post :message="post.message"></post>
-        </div>
+                <!-- No result -->
+                <div v-else class="no-result apollo">No result :(</div>
+            </template>
+        </ApolloQuery>
     </div>
 </template>
 
 <script>
-    import Post from '../components/Post';
-    import ErrorMessage from '../components/ErrorMessage';
-
     export default {
         name: 'posts',
-        components: {
-            Post,
-            ErrorMessage,
-        },
         data () {
             return {
-                message: '',
+                search: ''
             };
-        },
-        created () {
-            this.$store.dispatch('post/fetchPosts');
-        },
-        computed: {
-            isLoading () {
-                return this.$store.getters['post/isLoading'];
-            },
-            hasError () {
-                return this.$store.getters['post/hasError'];
-            },
-            error () {
-                return this.$store.getters['post/error'];
-            },
-            hasPosts () {
-                return this.$store.getters['post/hasPosts'];
-            },
-            posts () {
-                return this.$store.getters['post/posts'];
-            },
-            canCreatePost () {
-                return this.$store.getters['security/hasRole']('ROLE_FOO');
-            }
-        },
-        methods: {
-            createPost () {
-                this.$store.dispatch('post/createPost', this.$data.message)
-                    .then(() => this.$data.message = '')
-            },
         },
     }
 </script>

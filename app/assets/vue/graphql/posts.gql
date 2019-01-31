@@ -1,0 +1,18 @@
+query searchPosts ($search: String) {
+  posts(search: $search) {
+    id
+    message
+    author {
+      login
+    }
+    comments {
+      items {
+        id
+        message
+        author {
+          login
+        }
+      }
+    }
+  }
+}

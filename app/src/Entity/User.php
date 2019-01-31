@@ -6,11 +6,14 @@ use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use TheCodingMachine\GraphQLite\Annotations\Field;
+use TheCodingMachine\GraphQLite\Annotations\Type;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
+ * @Type()
  */
 class User implements UserInterface
 {
@@ -50,13 +53,13 @@ class User implements UserInterface
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="created", type="datetime")
+     * @ORM\Column(name="created", type="datetime_immutable")
      */
     private $created;
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     * @ORM\Column(name="updated", type="datetime_immutable", nullable=true)
      */
     private $updated;
 
@@ -74,7 +77,7 @@ class User implements UserInterface
      */
     public function onPrePersist(): void
     {
-        $this->created = Carbon::now();
+        $this->created = new \DateTimeImmutable();
     }
 
     /**
@@ -83,11 +86,11 @@ class User implements UserInterface
      */
     public function onPreUpdate(): void
     {
-        $this->updated = Carbon::now();
+        $this->updated = new \DateTimeImmutable();
     }
 
     /**
-     * @return int
+     * @Field(outputType="ID")
      */
     public function getId(): int
     {
@@ -95,7 +98,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * @Field()
      */
     public function getLogin(): string
     {
@@ -112,7 +115,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return string
+     * @Field()
      */
     public function getUsername(): string
     {
@@ -166,6 +169,7 @@ class User implements UserInterface
     }
 
     /**
+     * @Field()
      * @return string[]
      */
     public function getRoles(): array
@@ -191,17 +195,17 @@ class User implements UserInterface
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): \DateTimeImmutable
     {
         return $this->created;
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      */
-    public function getUpdated(): ?\DateTime
+    public function getUpdated(): ?\DateTimeImmutable
     {
         return $this->updated;
     }

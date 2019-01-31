@@ -4,8 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "989016a3e50bd9fadb2e4de6d55e7b94",
+    "content-hash": "c5493a6109f02ba1269c1cf5eb220d0c",
     "packages": [
+        {
+            "name": "beberlei/porpaginas",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/porpaginas.git",
+                "reference": "2bd874d7c5711131367fe1f646e7afc3e17aab94"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beberlei/porpaginas/zipball/2bd874d7c5711131367fe1f646e7afc3e17aab94",
+                "reference": "2bd874d7c5711131367fe1f646e7afc3e17aab94",
+                "shasum": ""
+            },
+            "require-dev": {
+                "doctrine/orm": ">=2.2",
+                "knplabs/knp-components": "@stable",
+                "pagerfanta/pagerfanta": "@stable",
+                "phake/phake": "@stable",
+                "phpunit/phpunit": "^5.7",
+                "symfony/event-dispatcher": "@stable",
+                "twig/twig": "@stable"
+            },
+            "suggest": {
+                "pagerfanta/pagerfanta": "For rendering pagination with Pagerfanta"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Porpaginas\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                }
+            ],
+            "description": "Library that generically solves several pagination issues with DAO/repository abstractions.",
+            "keywords": [
+                "page",
+                "pagination",
+                "paginator",
+                "paging"
+            ],
+            "time": "2017-08-31T09:40:09+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.6.0",
@@ -5823,12 +5874,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thecodingmachine/graphqlite-bundle.git",
-                "reference": "3e8a9085b9fee95dc837611c144ed9c0da26a7fe"
+                "reference": "9da7b22edc0ceee6f420514ebf4979d44eb106f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thecodingmachine/graphqlite-bundle/zipball/3e8a9085b9fee95dc837611c144ed9c0da26a7fe",
-                "reference": "3e8a9085b9fee95dc837611c144ed9c0da26a7fe",
+                "url": "https://api.github.com/repos/thecodingmachine/graphqlite-bundle/zipball/9da7b22edc0ceee6f420514ebf4979d44eb106f1",
+                "reference": "9da7b22edc0ceee6f420514ebf4979d44eb106f1",
                 "shasum": ""
             },
             "require": {
@@ -5880,7 +5931,7 @@
                 "graphql",
                 "symfony"
             ],
-            "time": "2019-01-29T15:40:41+00:00"
+            "time": "2019-01-31T10:04:54+00:00"
         },
         {
             "name": "thecodingmachine/safe",

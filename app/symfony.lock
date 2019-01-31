@@ -1,4 +1,7 @@
 {
+    "beberlei/porpaginas": {
+        "version": "v1.2"
+    },
     "composer/xdebug-handler": {
         "version": "1.3.1"
     },

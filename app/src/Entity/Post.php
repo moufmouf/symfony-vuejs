@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
+use TheCodingMachine\GraphQLite\Annotations\Field;
+use TheCodingMachine\GraphQLite\Annotations\Type;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="posts")
  * @ORM\HasLifecycleCallbacks
+ * @Type()
  */
 class Post
 {
@@ -27,16 +29,29 @@ class Post
     private $message;
 
     /**
-     * @var \DateTime
-     * @ORM\Column(name="created", type="datetime")
+     * @var \DateTimeImmutable
+     * @ORM\Column(name="created", type="datetime_immutable")
      */
     private $created;
 
     /**
-     * @var \DateTime
-     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     * @var \DateTimeImmutable
+     * @ORM\Column(name="updated", type="datetime_immutable", nullable=true)
      */
     private $updated;
+
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $author;
+
+    public function __construct(string $message, User $author)
+    {
+        $this->message = $message;
+        $this->author = $author;
+    }
 
     /**
      * @ORM\PrePersist
@@ -44,7 +59,7 @@ class Post
      */
     public function onPrePersist(): void
     {
-        $this->created = Carbon::now();
+        $this->created = new \DateTimeImmutable();
     }
 
     /**
@@ -53,11 +68,11 @@ class Post
      */
     public function onPreUpdate(): void
     {
-        $this->updated = Carbon::now();
+        $this->updated = new \DateTimeImmutable();
     }
 
     /**
-     * @return int
+     * @Field(outputType="ID")
      */
     public function getId(): int
     {
@@ -65,7 +80,7 @@ class Post
     }
 
     /**
-     * @return string
+     * @Field()
      */
     public function getMessage(): string
     {
@@ -82,18 +97,26 @@ class Post
     }
 
     /**
-     * @return \DateTime
+     * @Field()
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): \DateTimeImmutable
     {
         return $this->created;
     }
 
     /**
-     * @return \DateTime|null
+     * @Field()
      */
-    public function getUpdated(): ?\DateTime
+    public function getUpdated(): ?\DateTimeImmutable
     {
         return $this->updated;
+    }
+
+    /**
+     * @Field()
+     */
+    public function getAuthor(): User
+    {
+        return $this->author;
     }
 }

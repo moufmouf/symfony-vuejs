@@ -42,6 +42,12 @@ Encore
 
     // enables Sass/SCSS support
     //.enableSassLoader()
+    // enable GraphQL queries support
+    .addLoader({
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+    })
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

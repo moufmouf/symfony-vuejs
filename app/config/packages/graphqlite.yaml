@@ -2,7 +2,8 @@ graphqlite:
   namespace:
     controllers: App\Controller\
     types:
-      - App\
+      - App\Entity
+      - App\Types
   debug:
     # Include exception messages in output when an error arises
     INCLUDE_DEBUG_MESSAGE: false

@@ -20,5 +20,7 @@ final class UserFixtures extends Fixture
         $userEntity->setRoles(['ROLE_FOO']);
         $manager->persist($userEntity);
         $manager->flush();
+
+        $this->addReference('foo_user', $userEntity);
     }
 }
